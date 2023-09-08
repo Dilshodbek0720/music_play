@@ -4,6 +4,7 @@ import 'package:music_play/utils/routes.dart';
 import 'blocs/bloc/audio_bloc.dart';
 import 'blocs/cubit/audio_cubit.dart';
 
+
 void main() {
   runApp(const App());
 }

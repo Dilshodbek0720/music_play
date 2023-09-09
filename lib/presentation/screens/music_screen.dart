@@ -10,12 +10,11 @@ import '../../utils/style.dart';
 class MusicsScreen extends StatelessWidget {
   const MusicsScreen({Key? key}) : super(key: key);
 
-  // final player = AudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Music Player'),
+        title: const Text('Music Player'),
         centerTitle: true,
         backgroundColor: AppColors.cBADCEE,
         elevation: 0,
@@ -46,7 +45,7 @@ class MusicsScreen extends StatelessWidget {
                         Container(
                           height: 50,
                           width: 50,
-                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          decoration: const BoxDecoration(shape: BoxShape.circle),
                           child: QueryArtworkWidget(id: song.id, type: ArtworkType.AUDIO),
                         ),
                         Expanded(
@@ -66,7 +65,7 @@ class MusicsScreen extends StatelessWidget {
                         ),
                         Flexible(
                           child: Text(
-                            formatSeconds((song.duration! / 3600).toInt()),
+                            formatSeconds((song.duration! / 3600 * 3.6).toInt()),
                             style: AppStyle.bodyMedium,
                           ),
                         )

@@ -19,7 +19,15 @@ class AudioPlaying extends AudioState {
   List<Object> get props => [currentPosition, maxDuration];
 }
 
-class AudioPaused extends AudioState {}
+class AudioPaused extends AudioState {
+  final int currentPosition;
+  final int maxDuration;
+
+  const AudioPaused({required this.currentPosition, required this.maxDuration});
+
+  @override
+  List<Object> get props => [currentPosition, maxDuration];
+}
 
 class AudioStopped extends AudioState {}
 

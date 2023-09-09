@@ -22,10 +22,19 @@ class PauseAudio extends AudioEvent {}
 
 class StopAudio extends AudioEvent {}
 
-class SeekAudio extends AudioEvent {
+class SeekAudioPlaying extends AudioEvent {
   final int targetPosition;
 
-  const SeekAudio({required this.targetPosition});
+  const SeekAudioPlaying({required this.targetPosition});
+
+  @override
+  List<Object?> get props => [targetPosition];
+}
+
+class SeekAudioPause extends AudioEvent {
+  final int targetPosition;
+
+  const SeekAudioPause({required this.targetPosition});
 
   @override
   List<Object?> get props => [targetPosition];

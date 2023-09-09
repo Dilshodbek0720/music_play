@@ -7,5 +7,6 @@ class AppColors {
   static const Color cF1F1F1 = Color(0xFFF1F1F1);
   static const Color c585C60 = Color(0xFF585C60);
   static const Color cBADCEE = Color(0xFFBADCEE);
+  static const Color c293241 = Color(0xFF293241);
   static Color borderGrey = const Color(0xFF000000).withOpacity(0.4);
 }

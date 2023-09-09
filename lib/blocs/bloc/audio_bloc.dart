@@ -18,7 +18,8 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     on<PlayAudio>(_playAudio);
     on<PauseAudio>(_pauseAudio);
     on<StopAudio>(_stopAudio);
-    on<SeekAudio>(_seekAudio);
+    on<SeekAudioPause>(_seekAudioPause);
+    on<SeekAudioPlaying>(_seekAudioPlaying);
     on<ChangeDurationAudio>(_changeDurationAudio);
     on<CompleteAudio>(_completeAudio);
 
@@ -59,7 +60,8 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     if (_playerState == PlayerState.playing) {
       await _audioPlayer.pause();
       _playerState = PlayerState.paused;
-      emit(AudioPaused());
+      emit(AudioPaused(currentPosition: (await _audioPlayer.getCurrentPosition())!.inSeconds,
+          maxDuration: maxDuration));
     }
   }
 
@@ -71,10 +73,17 @@ class AudioBloc extends Bloc<AudioEvent, AudioState> {
     }
   }
 
-  _seekAudio(SeekAudio event, Emitter<AudioState> emit) async {
+  _seekAudioPlaying(SeekAudioPlaying event, Emitter<AudioState> emit) async {
     await _audioPlayer.seek(Duration(seconds: event.targetPosition));
     emit(AudioPlaying(currentPosition: event.targetPosition, maxDuration: maxDuration));
   }
+
+  _seekAudioPause(SeekAudioPause event, Emitter<AudioState> emit) async {
+    await _audioPlayer.seek(Duration(seconds: event.targetPosition));
+    emit(AudioPaused(currentPosition: event.targetPosition, maxDuration: maxDuration));
+  }
+
+
 
   _changeDurationAudio(ChangeDurationAudio event, Emitter<AudioState> emit) async {
     emit(AudioPlaying(currentPosition: event.newDuration, maxDuration: maxDuration));
